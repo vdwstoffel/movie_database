@@ -1,0 +1,30 @@
+<%- include("partials/header") %>
+
+<body>
+  
+  <h1 class="heading"><%= heading %> </h1>
+  <div class="movieCardArea">
+    <!-- Skip over person and only return movies/series -->
+    <!-- Check to see if the title is movie of series -->
+    <% for(let item of movieData) { %> <% if (item.media_type !== "person") { %>
+    <div class="movieCard">
+      <% if (item.title) { %>
+      <a href="/movies/m-<%= item.id %>" class="movieTitle"><%= item.title %></a>
+      <% } else { %>
+      <a href=/movies/s-<%= item.id %>" class="movieTitle"><%= item.name %></a>
+      <% } %>
+      <div class="movie-info">
+        <div class="movie-description hidden">
+          <p><%= item.overview.substring(0, 600) %></p>
+        </div>
+        <img
+          class="moviePoster"
+          src="http://image.tmdb.org/t/p/w600_and_h900_bestv2/<%= item.poster_path %>"
+          alt="poster.img"
+        />
+      </div>
+    </div>
+    <% } %> <% } %>
+  </div>
+</body>
+<%- include("partials/footer") %>

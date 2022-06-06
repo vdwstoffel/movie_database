@@ -1,0 +1,84 @@
+<%- include("partials/header") %>
+
+<div class="main-content">
+  <% if (titleData.title) { %>
+  <h1><%= titleData.title %></h1>
+  <% } else { %>
+  <h1><%= titleData.name %></h1>
+  <% } %>
+  <div class="media">
+    <% if (videoData) { %>
+    <iframe
+      src="https://www.youtube.com/embed/<%= videoData.key %>"
+      frameborder="0"
+    ></iframe>
+    <% } %>
+  </div>
+  <p class="tagline"><%= titleData.tagline %></p>
+  <p class="overview"><%= titleData.overview %></p>
+  <div class="genres">
+    <% titleData.genres.forEach(function (genre) { %>
+    <p class="genre"><%- genre.name %></p>
+    <% })%>
+  </div>
+  <p class="released">Released: <%= titleData.release_date %></p>
+  <p class="runtime">Runtime: <%= titleData.runtime %> minutes</p>
+  <p class="rating"><i class="fas fa-star"></i><%= titleData.vote_average %></p>
+  <div class="providers">
+    <% providers.forEach((provider) => { %>
+    <img
+      src="https://image.tmdb.org/t/p/original/<%= provider.logo_path %>"
+      alt="provider-img"
+    />
+    <p><%= provider.provider_name %></p>
+    <% }) %>
+  </div>
+
+
+  <form action="/watchlist/add" method="post">
+    <input
+      type="hidden"
+      name="title"
+      value="<%=  titleData.title ? titleData.title: titleData.name  %>"
+    />
+    <input type="hidden" name="movieId" value="<%= titleData.id %>" />
+    <input
+      type="hidden"
+      name="media_type"
+      value="<%= titleData.title ? 'm': 's'%>"
+    />
+
+    <% const genres = [] %>
+    <% titleData.genres.forEach((genre) => genres.push(genre.name)) %> 
+     <input type="hidden" name="genres" value="<%= genres %>">
+
+    <input type="hidden" name="rating" value=<%= titleData.vote_average %> >
+
+    <% const streams = [] %> 
+    <% providers.forEach((provider) => { %>
+      <% streams.push(provider.provider_name)%> 
+    <% }) %> 
+    <input type="hidden" name="streams" value="<%= streams %>">
+  </form>
+
+
+
+  <p>Find Similar Movies</p>
+  <div class="similar-movies">
+    <% for (let movie of similarMovies) { %> <% if (movie.title) { %>
+    <a href="/movies/m-<%= movie.id %>" class="movieTitle"
+      ><img
+        src="https://image.tmdb.org/t/p/original/<%= movie.poster_path %>"
+        alt="poster-img"
+    /></a>
+    <% } else { %>
+    <a href="/movies/s-<%= movie.id %>" class="movieTitle"
+      ><img
+        src="https://image.tmdb.org/t/p/original/<%= movie.poster_path %>"
+        alt="poster-img"
+    /></a>
+    <% } %> <% } %>
+  </div>
+</div>
+
+<%- include("partials/footer") %>
