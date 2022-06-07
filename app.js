@@ -109,17 +109,6 @@ app.get("/movies/:id", (req, res) => {
   });
 });
 
-// API's
-app.get("/rest/titles", (req, res) => {
-  watchList.WatchList.find({}, (err, titles) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(titles);
-    }
-  });
-});
-
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server is now live");
 });
