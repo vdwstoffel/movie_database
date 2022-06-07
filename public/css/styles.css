@@ -1,5 +1,6 @@
 :root {
   --navbar-margin: 10%;
+  --color-theme: #6c757d;
 }
 
 html {
@@ -31,7 +32,7 @@ a {
 }
 
 .fa-search {
-  color: #6c757d;
+  color: var(--color-theme);
 }
 
 .nav-item {
@@ -44,7 +45,7 @@ a {
 }
 
 .social-icons {
-  color: #6c757d;
+  color: var(--color-theme);
   font-size: 2em;
   padding: 0.5em 0.5em;
 }
