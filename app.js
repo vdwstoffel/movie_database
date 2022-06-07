@@ -120,6 +120,6 @@ app.get("/rest/titles", (req, res) => {
   });
 });
 
-app.listen(proces.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Port 3000 is now live");
 });
