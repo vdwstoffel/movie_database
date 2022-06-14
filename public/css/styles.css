@@ -114,10 +114,6 @@ a {
   font-style: italic;
 }
 
-.overview {
-  width: 50%;
-}
-
 .genres {
   display: flex;
   flex-direction: row;
@@ -156,4 +152,5 @@ a {
 
 .similar-movies img {
   width: 70px;
+  padding: 0.1em;
 }

@@ -33,36 +33,6 @@
     <p><%= provider.provider_name %></p>
     <% }) %>
   </div>
-
-
-  <form action="/watchlist/add" method="post">
-    <input
-      type="hidden"
-      name="title"
-      value="<%=  titleData.title ? titleData.title: titleData.name  %>"
-    />
-    <input type="hidden" name="movieId" value="<%= titleData.id %>" />
-    <input
-      type="hidden"
-      name="media_type"
-      value="<%= titleData.title ? 'm': 's'%>"
-    />
-
-    <% const genres = [] %>
-    <% titleData.genres.forEach((genre) => genres.push(genre.name)) %> 
-     <input type="hidden" name="genres" value="<%= genres %>">
-
-    <input type="hidden" name="rating" value=<%= titleData.vote_average %> >
-
-    <% const streams = [] %> 
-    <% providers.forEach((provider) => { %>
-      <% streams.push(provider.provider_name)%> 
-    <% }) %> 
-    <input type="hidden" name="streams" value="<%= streams %>">
-  </form>
-
-
-
   <p>Find Similar Movies</p>
   <div class="similar-movies">
     <% for (let movie of similarMovies) { %> <% if (movie.title) { %>
